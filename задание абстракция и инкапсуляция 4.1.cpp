@@ -1,5 +1,5 @@
-﻿// задание абстракция и инкапсуляция 4.1.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//
+﻿// задание абстракция и инкапсуляция 4.1.cpp.
+
 
 #include <iostream>
 #include <string>
@@ -16,21 +16,7 @@ class location {
     std::string apartment;
     
 public:
-    ///*const int size;*/
-    //location(std::string city, std::string street, std::string house, std::string apartment, 
-    //    /*int size, location* arr,*//*const int size, location in*/ )
-    //{
-    //    location* arr[sizeof(arr) / sizeof(arr[0])];
-
-    //    //location arr[sizeof(arr) / sizeof(arr[1])];
-    //    for (int i = 0; i < size; ++i) {
-    //        arr[i].city;
-    //        arr[i].street;
-    //        arr[i].house;
-    //        arr[i].apartment;
-    //    }
-    //       
-    //}
+   
 
         location(std::string city, std::string street, std::string house, std::string apartment)
     {
@@ -73,30 +59,31 @@ public:
     }*/
     
 
-    void setout(location* arr, int size, location in2) {
+    void setout(location* loc_in_array, int size) {
         std::ofstream rf;
         rf.open("out.txt");
         //std::cout << rf .is_open() << std::endl; 
-
+        location temp;
         rf << size;
         rf << "\n";
         
             for (int i = 0; i < size / 2; i++) {
                
                 
-                in2 = arr[i];
-                arr[i] = arr[(size - i) - 1];
-                arr[(size - i) - 1] = in2;
+                temp = loc_in_array[i];
+                loc_in_array[i] = loc_in_array[(size - i) - 1];
+                loc_in_array[(size - i) - 1] = temp;
             }
 
             for (int i = 0; i < size; i++){
 
-                rf << arr[i].city + ",  " + arr[i].street + ",  " 
-                    + arr[i].house + ",  " + arr[i].apartment + "\n";
+                rf << loc_in_array[i].city + ",  " + loc_in_array[i].street + ",  "
+                    + loc_in_array[i].house + ",  " + loc_in_array[i].apartment + "\n";
             
         }               
 
         rf.close();
+
     }
 
    
@@ -104,25 +91,24 @@ public:
   location() = default;
    
     
-    void print_array(location* arr, int size) {
-        std::cout << size << std::endl;
-        for (int i = 0; i < size; ++i) {
-            std::cout                
-                << arr[i].city << std::endl
-                << arr[i].street << std::endl
-                << arr[i].house << std::endl
-                << arr[i].apartment << std::endl;
-            std::cout << std::endl;
-        }
-
-    }   
-
-    
-
    
 
+   void print_array(location* loc_in_array, int size) {
+      std::cout << size << std::endl;
+      for (int i = 0; i < size; ++i) {
+          std::cout
+              << loc_in_array[i].city << std::endl
+              << loc_in_array[i].street << std::endl
+              << loc_in_array[i].house << std::endl
+              << loc_in_array[i].apartment << std::endl;
+          std::cout << std::endl;
+      }
+
+  } 
     
 };
+
+
 
 
 
@@ -132,9 +118,7 @@ int main()
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
 
-    location in(" ", " ", " ", " ");
-    location in1(" ", " ", " ", " ");
-    location in2(" ", " ", " ", " ");   
+    location in(" ", " ", " ", " ");   
 
     int size;
     std::string city;
@@ -165,7 +149,7 @@ int main()
 
  in.print_array(loc_in_array, size);
 
- in.setout(loc_in_array, size, in2);   
+ in.setout(loc_in_array, size);   
 
     delete[] loc_in_array;
 
